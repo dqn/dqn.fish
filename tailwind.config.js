@@ -9,8 +9,13 @@ module.exports = {
       colors: {
         'theme-color': '#368ae9',
       },
+      height: {
+        '60vh': '60vh',
+      },
     },
   },
-  variants: {},
+  variants: {
+    margin: ['first'],
+  },
   plugins: [],
 };

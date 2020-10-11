@@ -13,7 +13,9 @@ export const NavigationBar: React.FC = () => {
           </Link>
         </div>
         <div className="text-right flex-grow">
-          <a>About</a>
+          <Link href="/about">
+            <a>About</a>
+          </Link>
         </div>
       </div>
     </header>
