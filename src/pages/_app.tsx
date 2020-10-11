@@ -18,11 +18,18 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
         titleTemplate={`%s - ${title}`}
       />
 
-      <div className="font-sans text-gray-800">
-        <NavigationBar />
-        <Component {...pageProps} />
-        <footer className="text-center text-xs py-4">© 2020 DQN</footer>
-      </div>
+      <NavigationBar />
+      <Component {...pageProps} />
+      <footer className="text-center text-xs py-4">© 2020 DQN</footer>
+
+      <style global jsx>{`
+        html {
+          color: white;
+          background-color: #21242d;
+          font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN',
+            'Hiragino Sans', Meiryo, sans-serif;
+        }
+      `}</style>
     </>
   );
 };
