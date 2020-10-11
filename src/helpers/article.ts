@@ -1,4 +1,4 @@
-import fs from 'fs/promises';
+import fs from 'fs';
 import matter from 'gray-matter';
 import hljs from 'highlight.js';
 import marked from 'marked';
@@ -30,7 +30,7 @@ function readArticle(filePath: string): Article {
 }
 
 export async function getArticleFileNames(): Promise<string[]> {
-  return fs.readdir(articlesPath);
+  return fs.readdirSync(articlesPath);
 }
 
 export async function getArticles(): Promise<Article[]> {
