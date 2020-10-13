@@ -25,10 +25,10 @@ export const ArticleList: React.FC<Props> = ({ articles }) => {
           </div>
           <div className="flex mt-1">
             {tags.map((tag, i) => (
-              <div className="ml-2 first:ml-0">
+              <div className="ml-2 first:ml-0" key={i}>
                 <Link href="/tags/[id]" as={'/tags/' + tag}>
                   <a>
-                    <Tag name={tag} key={i} />
+                    <Tag name={tag} />
                   </a>
                 </Link>
               </div>
