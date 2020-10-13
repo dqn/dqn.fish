@@ -8,6 +8,7 @@ export type Article = {
   id: string;
   title: string;
   published: string;
+  tags: string[];
   content: string;
 };
 
