@@ -33,7 +33,7 @@ export const About: React.FC = () => {
         <div className="absolute w-full h-60vh">
           <div className="h-full flex items-center">
             <div className="text-center w-full">
-              <h1 className="font-bold text-3xl">uouo.fish</h1>
+              <h1 className="font-bold text-3xl">dqn.fish</h1>
             </div>
           </div>
         </div>
