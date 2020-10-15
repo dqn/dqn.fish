@@ -4,6 +4,14 @@ import hljs from 'highlight.js';
 import marked from 'marked';
 import path from 'path';
 
+const renderer = new marked.Renderer();
+const linkRenderer = renderer.link.bind(renderer);
+
+renderer.link = (href, title, text) => {
+  const html = linkRenderer(href, title, text);
+  return html.replace(/^<a /, '<a target="_blank" rel="noopener noreferrer" ');
+};
+
 export type Article = {
   id: string;
   title: string;
@@ -25,7 +33,7 @@ function readArticle(filePath: string): Article {
 
   return {
     id: path.basename(filePath, '.md'),
-    content: marked(md.content),
+    content: marked(md.content, { renderer }),
     ...(md.data as Omit<Article, 'id' | 'content'>),
   };
 }
