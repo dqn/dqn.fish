@@ -1329,10 +1329,10 @@
   resolved "https://registry.yarnpkg.com/@types/marked/-/marked-1.1.0.tgz#53509b5f127e0c05c19176fcf1d743a41e00ff19"
   integrity sha512-j8XXj6/l9kFvCwMyVqozznqpd/nk80krrW+QiIJN60Uu9gX5Pvn4/qPJ2YngQrR3QREPwmrE1f9/EWKVTFzoEw==
 
-"@types/node@14.14.1":
-  version "14.14.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.1.tgz#b8d6e8a84b119ae51fd0593c71eb3a9dd31fea4e"
-  integrity sha512-D2/Xwp9c49JhIWq7SIrdvoYyGdq6yXkr5FTldN4rus9XljYFBul6P2epAID8xepOpL4ffcx09C05FZGK/1AIkw==
+"@types/node@14.14.2":
+  version "14.14.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.2.tgz#d25295f9e4ca5989a2c610754dc02a9721235eeb"
+  integrity sha512-jeYJU2kl7hL9U5xuI/BhKPZ4vqGM/OmK6whiFAXVhlstzZhVamWhDSmHyGLIp+RVyuF9/d0dqr2P85aFj4BvJg==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
