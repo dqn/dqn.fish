@@ -1,6 +1,5 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { NextSeo } from 'next-seo';
-import React from 'react';
 
 import { Props as TagProps, Tag } from '@/components/pages/Tag';
 import { getArticle, getArticleFileNames } from '@/helpers/article';

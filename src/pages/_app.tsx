@@ -3,7 +3,7 @@ import 'highlight.js/styles/vs2015.css';
 
 import { DefaultSeo } from 'next-seo';
 import { AppProps } from 'next/app';
-import React from 'react';
+import * as React from 'react';
 
 import { name as title } from '@/../package.json';
 import { NavigationBar } from '@/components/templates/NavigationBar';

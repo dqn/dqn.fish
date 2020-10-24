@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import Link from 'next/link';
-import React from 'react';
+import * as React from 'react';
 
 import { Article } from '@/helpers/article';
 

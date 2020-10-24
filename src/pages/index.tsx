@@ -1,6 +1,5 @@
 import { GetStaticProps, NextPage } from 'next';
 import { NextSeo } from 'next-seo';
-import React from 'react';
 
 import { name as title } from '@/../package.json';
 import { Home, Props as HomeProps } from '@/components/pages/Home';
