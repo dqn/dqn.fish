@@ -11,8 +11,13 @@ module.exports = {
           contentSecurityPolicy: {
             directives: {
               defaultSrc: "'self'",
-              connectSrc: "'self'",
-              scriptSrc: ["'self'", "'unsafe-eval'"],
+              connectSrc: ["'self'", 'https://www.google-analytics.com'],
+              scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
+              scriptSrcElem: [
+                "'self'",
+                'https://www.googletagmanager.com',
+                "'unsafe-inline'",
+              ],
               styleSrc: ["'self'", "'unsafe-inline'"],
             },
           },
