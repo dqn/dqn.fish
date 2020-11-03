@@ -11,7 +11,11 @@ module.exports = {
           contentSecurityPolicy: {
             directives: {
               defaultSrc: "'self'",
-              connectSrc: ["'self'", 'https://www.google-analytics.com'],
+              connectSrc: [
+                "'self'",
+                'https://www.google-analytics.com',
+                'https://vitals.vercel-analytics.com',
+              ],
               scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
               scriptSrcElem: [
                 "'self'",
