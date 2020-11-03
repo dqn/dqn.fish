@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "textlint articles/*"
   },
   "dependencies": {
     "clsx": "1.1.1",
