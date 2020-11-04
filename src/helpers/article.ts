@@ -38,18 +38,18 @@ function readArticle(filePath: string): Article {
   };
 }
 
-export async function getArticleFileNames(): Promise<string[]> {
+export function getArticleFileNames(): string[] {
   return fs.readdirSync(articlesPath);
 }
 
-export async function getArticles(): Promise<Article[]> {
-  const fileNames = await getArticleFileNames();
+export function getArticles(): Article[] {
+  const fileNames = getArticleFileNames();
   const paths = fileNames.map((fileName) => path.join(articlesPath, fileName));
   const articles = paths.map(readArticle);
 
   return articles.reverse();
 }
 
-export async function getArticle(id: string): Promise<Article> {
+export function getArticle(id: string): Article {
   return readArticle(path.join(articlesPath, id));
 }

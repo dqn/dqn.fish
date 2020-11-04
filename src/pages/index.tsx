@@ -15,7 +15,7 @@ const HomePage: NextPage<HomeProps> = (props) => {
 };
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  const articles = await getArticles();
+  const articles = getArticles();
   return {
     props: {
       articles,

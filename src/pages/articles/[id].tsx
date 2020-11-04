@@ -24,7 +24,7 @@ export const getStaticProps: GetStaticProps<ArticleProps, Params> = async ({
     throw new TypeError('params must not be undefined');
   }
 
-  const article = await getArticle(params.id + '.md');
+  const article = getArticle(params.id + '.md');
   return {
     props: {
       article,
@@ -33,7 +33,7 @@ export const getStaticProps: GetStaticProps<ArticleProps, Params> = async ({
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const fileNames = await getArticleFileNames();
+  const fileNames = getArticleFileNames();
   const paths = fileNames.map((fileName) => ({
     params: { id: fileName.replace(/\.md$/, '') },
   }));
