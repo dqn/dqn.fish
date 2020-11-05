@@ -9,10 +9,19 @@
             <link>https://dqn.fish</link>
         </image>
         <generator>dqn.fish</generator>
-        <lastBuildDate>Thu, 05 Nov 2020 15:33:54 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 05 Nov 2020 16:51:33 GMT</lastBuildDate>
         <atom:link href="https://dqn.fish/feed.xml" rel="self" type="application/rss+xml"/>
         <copyright><![CDATA[(C) dqn]]></copyright>
         <language><![CDATA[ja]]></language>
+        <item>
+            <title><![CDATA[RSS フィードに対応した]]></title>
+            <description><![CDATA[このサイトの記事が RSS フィードで購読できるようになりました。次の URL をフィードリーダーに追加することで購読できます。 https://dqn.fish/feed.xml 実装の話など Nuxt.js には feed-module、Gatsby には gatsby-plugin-feed などのライブラリがあり比較的簡単に RSS フィードを導入できるようですが、Next.js にそのようなものは見当たらず、自前で XML を作成し public ディレクトリに吐くスクリプトを用意しました。Gatsby の存在があるので Next.js ではこのあたりはあまり充実していないのでしょう...]]></description>
+            <link>https://dqn.fish/articles/2020-11-06-introduce-rss</link>
+            <guid isPermaLink="true">https://dqn.fish/articles/2020-11-06-introduce-rss</guid>
+            <dc:creator><![CDATA[dqn]]></dc:creator>
+            <pubDate>Thu, 05 Nov 2020 16:46:52 GMT</pubDate>
+            <enclosure url="https://dqn.fish/favicon.png" length="0" type="image/png"/>
+        </item>
         <item>
             <title><![CDATA[Brainfuck にコンパイル可能な高水準言語を作った話]]></title>
             <description><![CDATA[少し前に Bigbrain という自作言語を作ったので紹介します。この言語は Brainfuck にコンパイルされます。ソースコードは GitHub で公開されています。 https://github.com/dqn/bigbrain Bigbrain という名前は、知的であることを意味する「Big brain」というスラングが由来です。 例 次のような Bigbrain のコードをコンパイルすると、 x = 30; for (i = 1; i >>+++++-]>[>>+[-]+>[+>-]+>+>[>-]>>+>+>>>[>>>-]>+>+>>[>>-]+>>-[>-]-[+>>+>>[>...]]></description>
