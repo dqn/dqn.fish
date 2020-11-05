@@ -24,8 +24,8 @@ export const getStaticProps: GetStaticProps<TagProps, Params> = async ({
     throw new TypeError('params must not be undefined');
   }
 
-  const fileNames = await getArticleFileNames();
-  const articles = await Promise.all(fileNames.map(getArticle));
+  const fileNames = getArticleFileNames();
+  const articles = fileNames.map(getArticle);
   const tagArticles = articles.filter((article) =>
     article.tags.includes(params.id),
   );
@@ -39,8 +39,8 @@ export const getStaticProps: GetStaticProps<TagProps, Params> = async ({
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const fileNames = await getArticleFileNames();
-  const articles = await Promise.all(fileNames.map(getArticle));
+  const fileNames = getArticleFileNames();
+  const articles = fileNames.map(getArticle);
   const tags = articles.flatMap((article) => article.tags);
   const uniqueTags = [...new Set(tags)];
   const paths = uniqueTags.map((tag) => ({ params: { id: tag } }));

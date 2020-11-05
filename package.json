@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && yarn build:rss",
+    "build:rss": "ts-node --dir ./scripts --transpile-only ./rss/index.ts",
     "start": "next start",
     "lint": "textlint articles/*"
   },
@@ -21,8 +22,10 @@
   "devDependencies": {
     "@types/gtag.js": "0.0.3",
     "@types/marked": "1.1.0",
-    "@types/node": "14.14.6",
+    "@types/node": "^14.14.6",
     "@types/react": "16.9.55",
+    "@types/remove-markdown": "^0.1.1",
+    "@types/rss": "^0.0.28",
     "autoprefixer": "10.0.1",
     "cssnano": "4.1.10",
     "husky": "4.3.0",
@@ -31,11 +34,14 @@
     "postcss-flexbugs-fixes": "5.0.0",
     "postcss-preset-env": "6.7.0",
     "prettier": "2.1.2",
+    "remove-markdown": "^0.3.0",
+    "rss": "^1.2.2",
     "tailwindcss": "1.9.6",
     "textlint": "11.7.6",
     "textlint-rule-preset-ja-spacing": "2.0.2",
     "textlint-rule-preset-ja-technical-writing": "4.0.1",
     "textlint-rule-spellcheck-tech-word": "5.0.0",
+    "ts-node": "^9.0.0",
     "typescript": "4.0.5"
   },
   "license": "MIT",

@@ -1,8 +1,11 @@
 import fs from 'fs';
+import path from 'path';
 import matter from 'gray-matter';
 import hljs from 'highlight.js';
 import marked from 'marked';
-import path from 'path';
+import removeMd from 'remove-markdown';
+
+const maxExcerptLength = 300;
 
 const renderer = new marked.Renderer();
 const linkRenderer = renderer.link.bind(renderer);
@@ -18,6 +21,7 @@ export type Article = {
   published: string;
   tags: string[];
   content: string;
+  excerpt: string;
 };
 
 marked.setOptions({
@@ -28,28 +32,39 @@ marked.setOptions({
 
 const articlesPath = path.join(process.cwd(), 'articles');
 
+function getExcerpt(content: string): string {
+  let excerpt = removeMd(content).trim().replace(/\s+/g, ' ');
+
+  if (excerpt.length > maxExcerptLength) {
+    return excerpt.slice(0, maxExcerptLength) + '...';
+  }
+
+  return excerpt;
+}
+
 function readArticle(filePath: string): Article {
   const md = matter.read(filePath);
 
   return {
     id: path.basename(filePath, '.md'),
     content: marked(md.content, { renderer }),
-    ...(md.data as Omit<Article, 'id' | 'content'>),
+    excerpt: getExcerpt(md.content),
+    ...(md.data as Omit<Article, 'id' | 'content' | 'excerpt'>),
   };
 }
 
-export async function getArticleFileNames(): Promise<string[]> {
+export function getArticleFileNames(): string[] {
   return fs.readdirSync(articlesPath);
 }
 
-export async function getArticles(): Promise<Article[]> {
-  const fileNames = await getArticleFileNames();
+export function getArticles(): Article[] {
+  const fileNames = getArticleFileNames();
   const paths = fileNames.map((fileName) => path.join(articlesPath, fileName));
   const articles = paths.map(readArticle);
 
   return articles.reverse();
 }
 
-export async function getArticle(id: string): Promise<Article> {
+export function getArticle(id: string): Article {
   return readArticle(path.join(articlesPath, id));
 }
