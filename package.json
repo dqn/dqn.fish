@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "clsx": "1.1.1",
-    "dayjs": "1.9.4",
+    "dayjs": "1.9.5",
     "gray-matter": "4.0.2",
     "highlight.js": "10.3.2",
     "marked": "1.2.3",
