@@ -14,7 +14,7 @@ export const ArticleList: React.FC<Props> = ({ articles }) => {
   return (
     <div className="flex flex-wrap divide-y divide-gray-700">
       {articles.map(({ id, title, published, tags }, i) => (
-        <div className="w-full pt-6 pb-6" key={i}>
+        <div className="w-full py-5" key={i}>
           <Link href="/articles/[id]" as={'/articles/' + id}>
             <a className="text-lg lg:text-xl font-bold">{title}</a>
           </Link>

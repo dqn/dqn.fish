@@ -38,8 +38,8 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
         html {
           color: white;
           background-color: #21242d;
-          font-family: 'Source Sans Pro', Helvetica, Arial, 游ゴシック体,
-            YuGothic, メイリオ, Meiryo, sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+            'Yu Gothic', 'YuGothic', Verdana, Meiryo, sans-serif;
         }
       `}</style>
     </>
