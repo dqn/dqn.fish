@@ -21,6 +21,14 @@ export const About: React.FC = () => {
       title: 'Contact',
       items: [<EmailLink email={'dqn443@gmail.com'} />],
     },
+    {
+      title: 'RSS',
+      items: [
+        <ExternalLink href={'/feed.xml'}>
+          https://dqn.fish/feed.xml
+        </ExternalLink>,
+      ],
+    },
   ];
 
   return (
