@@ -1,7 +1,7 @@
-import dayjs from 'dayjs';
-import * as React from 'react';
+import dayjs from "dayjs";
+import * as React from "react";
 
-import { Article as ArticleType } from '@/helpers/article';
+import { Article as ArticleType } from "@/helpers/article";
 
 export type Props = {
   article: ArticleType;
@@ -19,7 +19,7 @@ export const Article: React.FC<Props> = ({ article }) => {
           </h1>
           <div className="mt-2">
             <time className="text-sm text-gray-600">
-              {dayjs(article.published).format('YYYY/MM/DD')}
+              {dayjs(article.published).format("YYYY/MM/DD")}
             </time>
           </div>
         </div>

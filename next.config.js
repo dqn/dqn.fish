@@ -1,4 +1,4 @@
-const { createSecureHeaders } = require('next-secure-headers');
+const { createSecureHeaders } = require("next-secure-headers");
 
 module.exports = {
   poweredByHeader: false,
@@ -6,26 +6,26 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/(.*)',
+        source: "/(.*)",
         headers: createSecureHeaders({
           contentSecurityPolicy: {
             directives: {
               defaultSrc: "'self'",
               connectSrc: [
                 "'self'",
-                'https://www.google-analytics.com',
-                'https://vitals.vercel-analytics.com',
+                "https://www.google-analytics.com",
+                "https://vitals.vercel-analytics.com",
               ],
               scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
               scriptSrcElem: [
                 "'self'",
-                'https://www.googletagmanager.com',
+                "https://www.googletagmanager.com",
                 "'unsafe-inline'",
               ],
               styleSrc: ["'self'", "'unsafe-inline'"],
             },
           },
-          referrerPolicy: ['same-origin', 'strict-origin-when-cross-origin'],
+          referrerPolicy: ["same-origin", "strict-origin-when-cross-origin"],
         }),
       },
     ];

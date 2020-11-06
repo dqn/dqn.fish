@@ -1,9 +1,9 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import hljs from 'highlight.js';
-import marked from 'marked';
-import removeMd from 'remove-markdown';
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import hljs from "highlight.js";
+import marked from "marked";
+import removeMd from "remove-markdown";
 
 const maxExcerptLength = 300;
 
@@ -30,13 +30,13 @@ marked.setOptions({
   },
 });
 
-const articlesPath = path.join(process.cwd(), 'articles');
+const articlesPath = path.join(process.cwd(), "articles");
 
 function getExcerpt(content: string): string {
-  let excerpt = removeMd(content).trim().replace(/\s+/g, ' ');
+  let excerpt = removeMd(content).trim().replace(/\s+/g, " ");
 
   if (excerpt.length > maxExcerptLength) {
-    return excerpt.slice(0, maxExcerptLength) + '...';
+    return excerpt.slice(0, maxExcerptLength) + "...";
   }
 
   return excerpt;
@@ -46,10 +46,10 @@ function readArticle(filePath: string): Article {
   const md = matter.read(filePath);
 
   return {
-    id: path.basename(filePath, '.md'),
+    id: path.basename(filePath, ".md"),
     content: marked(md.content, { renderer }),
     excerpt: getExcerpt(md.content),
-    ...(md.data as Omit<Article, 'id' | 'content' | 'excerpt'>),
+    ...(md.data as Omit<Article, "id" | "content" | "excerpt">),
   };
 }
 

@@ -111,12 +111,12 @@ User-Agent: My user agent
 HTTP サーバーには Express を使用しています。`GET /hello` にリクエストがあれば、`Hello, World!` と返すだけの簡単なエンドポイントを用意しています。
 
 ```ts
-import express from 'express';
+import express from "express";
 
 const app = express();
 
-app.get('/hello', (_req, res) => {
-  res.send('Hello, World!');
+app.get("/hello", (_req, res) => {
+  res.send("Hello, World!");
 });
 
 app.listen(80);
@@ -127,14 +127,14 @@ app.listen(80);
 Node.js で TCP を使い通信するためには、標準ライブラリの `net` を使うことができます。Host に localhost、ポート番号に 80 を指定し、メッセージを送信しています。メッセージは、GET メソッドで `/hello` にリクエストするという内容です。
 
 ```ts
-import net from 'net';
+import net from "net";
 
-const client = net.connect(80, 'localhost', () => {
-  const message = 'GET /hello HTTP/1.1\r\nHost: localhost\r\n\r\n';
+const client = net.connect(80, "localhost", () => {
+  const message = "GET /hello HTTP/1.1\r\nHost: localhost\r\n\r\n";
   client.write(message);
 });
 
-client.on('data', (data) => {
+client.on("data", (data) => {
   console.log(data.toString());
   client.end();
 });

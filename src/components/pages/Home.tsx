@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { Article } from '@/helpers/article';
+import { Article } from "@/helpers/article";
 
-import { ArticleList } from '../organisms/ArticleList';
+import { ArticleList } from "../organisms/ArticleList";
 
 export type Props = {
   articles: Article[];

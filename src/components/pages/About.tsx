@@ -1,30 +1,30 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { SwimmingFish } from '@/components/organisms/SwimmingFish';
+import { SwimmingFish } from "@/components/organisms/SwimmingFish";
 
-import { EmailLink } from '../atoms/EmailLink';
-import { ExternalLink } from '../atoms/ExternalLink';
+import { EmailLink } from "../atoms/EmailLink";
+import { ExternalLink } from "../atoms/ExternalLink";
 
 export const About: React.FC = () => {
   const infomations = [
     {
-      title: 'Author',
+      title: "Author",
       items: [<span>DQN</span>],
     },
     {
-      title: 'Links',
+      title: "Links",
       items: [
         <ExternalLink href="https://github.com/dqn">GitHub</ExternalLink>,
       ],
     },
     {
-      title: 'Contact',
-      items: [<EmailLink email={'dqn443@gmail.com'} />],
+      title: "Contact",
+      items: [<EmailLink email={"dqn443@gmail.com"} />],
     },
     {
-      title: 'RSS',
+      title: "RSS",
       items: [
-        <ExternalLink href={'/feed.xml'}>
+        <ExternalLink href={"/feed.xml"}>
           https://dqn.fish/feed.xml
         </ExternalLink>,
       ],

@@ -6,7 +6,7 @@ export function pageview(url: string) {
     return;
   }
 
-  gtag('config', GA_TRACKING_ID, {
+  gtag("config", GA_TRACKING_ID, {
     page_path: url,
   });
 }
@@ -23,7 +23,7 @@ export function event({
   label: string;
   value: string;
 }) {
-  gtag('event', action, {
+  gtag("event", action, {
     event_category: category,
     event_label: label,
     value: value,

@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
-import * as React from 'react';
+import { useEffect, useRef, useState } from "react";
+import * as React from "react";
 
-import tailwind from '@/../tailwind.config';
+import tailwind from "@/../tailwind.config";
 
-const BACKGROUND_COLOR = tailwind.theme.extend.colors['theme-color'];
-const BUBBLE_COLOR = '#ffffffa0';
+const BACKGROUND_COLOR = tailwind.theme.extend.colors["theme-color"];
+const BUBBLE_COLOR = "#ffffffa0";
 
 const WIDTH_PER_BUBBLE = 100;
 const WIDTH_PER_FLOWING_TEXT = 200;
@@ -26,7 +26,7 @@ function random(min: number, max: number): number {
 }
 
 function useDisplayableSize(
-  ref: React.RefObject<HTMLCanvasElement>,
+  ref: React.RefObject<HTMLCanvasElement>
 ): [number, number] {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
@@ -41,11 +41,11 @@ function useDisplayableSize(
       setHeight(clientHeight);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     handleResize();
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return [width, height];
@@ -81,7 +81,7 @@ export const SwimmingFish: React.FC = () => {
     canvasRef.current.width = width;
     canvasRef.current.height = height;
 
-    const ctx = canvasRef.current?.getContext('2d');
+    const ctx = canvasRef.current?.getContext("2d");
     if (!ctx) {
       return;
     }
@@ -129,7 +129,7 @@ export const SwimmingFish: React.FC = () => {
     };
 
     const createFlowingText = (
-      base: Partial<Omit<FlowingText, 'text'>> & Pick<FlowingText, 'text'>,
+      base: Partial<Omit<FlowingText, "text">> & Pick<FlowingText, "text">
     ): FlowingText => {
       return {
         x: width,
@@ -137,7 +137,7 @@ export const SwimmingFish: React.FC = () => {
         size: random(MIN_FLOWING_TEXT_SIZE, MAX_FLOWING_TEXT_SIZE),
         verocity: random(MIN_FLOWING_TEXT_VEROCITY, MAX_FLOWING_TEXT_VEROCITY),
         transparency: Math.floor(
-          random(MIN_FLOWING_TEXT_TRANSPARENCY, MAX_FLOWING_TEXT_TRANSPARENCY),
+          random(MIN_FLOWING_TEXT_TRANSPARENCY, MAX_FLOWING_TEXT_TRANSPARENCY)
         ),
         reverse: Math.random() > 0.5,
         ...base,
@@ -147,7 +147,7 @@ export const SwimmingFish: React.FC = () => {
     const flowingTexts: FlowingText[] = [];
     for (let i = 0; i < width / WIDTH_PER_FLOWING_TEXT; ++i) {
       const flowingText = createFlowingText({
-        text: '🐟',
+        text: "🐟",
         x: random(0, width + MAX_FLOWING_TEXT_SIZE),
       });
       flowingTexts.push(flowingText);
@@ -157,7 +157,7 @@ export const SwimmingFish: React.FC = () => {
       if (flowingText.x < -flowingText.size) {
         Object.assign(
           flowingText,
-          createFlowingText({ text: flowingText.text }),
+          createFlowingText({ text: flowingText.text })
         );
         return;
       }
@@ -174,8 +174,8 @@ export const SwimmingFish: React.FC = () => {
     }: FlowingText) => {
       ctx.fillStyle = `#000000${transparency.toString(16)}`;
       ctx.font = `${size}px serif`;
-      ctx.textAlign = 'left';
-      ctx.textBaseline = 'top';
+      ctx.textAlign = "left";
+      ctx.textBaseline = "top";
 
       if (reverse) {
         ctx.scale(-1, 1);

@@ -1,23 +1,23 @@
-import '@/styles/index.css';
-import 'highlight.js/styles/vs2015.css';
+import "@/styles/index.css";
+import "highlight.js/styles/vs2015.css";
 
-import { DefaultSeo } from 'next-seo';
-import { AppProps } from 'next/app';
-import * as React from 'react';
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { DefaultSeo } from "next-seo";
+import { AppProps } from "next/app";
+import * as React from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
-import { name as title } from '@/../package.json';
-import { NavigationBar } from '@/components/templates/NavigationBar';
-import * as gtag from '@/helpers/gtag';
+import { name as title } from "@/../package.json";
+import { NavigationBar } from "@/components/templates/NavigationBar";
+import * as gtag from "@/helpers/gtag";
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
 
   useEffect(() => {
-    router.events.on('routeChangeComplete', gtag.pageview);
+    router.events.on("routeChangeComplete", gtag.pageview);
     return () => {
-      router.events.off('routeChangeComplete', gtag.pageview);
+      router.events.off("routeChangeComplete", gtag.pageview);
     };
   }, [router.events]);
 
@@ -25,7 +25,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
     <>
       <DefaultSeo
         openGraph={{
-          type: 'website',
+          type: "website",
         }}
         titleTemplate={`%s - ${title}`}
       />
@@ -38,8 +38,8 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
         html {
           color: white;
           background-color: #21242d;
-          font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
-            'Yu Gothic', 'YuGothic', Verdana, Meiryo, sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+            "Yu Gothic", "YuGothic", Verdana, Meiryo, sans-serif;
         }
       `}</style>
     </>

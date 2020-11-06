@@ -1,5 +1,5 @@
-import Document, { Head, Html, Main, NextScript } from 'next/document';
-import { GA_TRACKING_ID } from '@/helpers/gtag';
+import Document, { Head, Html, Main, NextScript } from "next/document";
+import { GA_TRACKING_ID } from "@/helpers/gtag";
 
 class MyDocument extends Document {
   render(): JSX.Element {

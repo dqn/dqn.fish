@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import * as React from 'react';
+import Link from "next/link";
+import * as React from "react";
 
-import { name as title } from '@/../package.json';
+import { name as title } from "@/../package.json";
 
 export const NavigationBar: React.FC = () => {
   return (

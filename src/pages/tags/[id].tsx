@@ -1,8 +1,8 @@
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import { NextSeo } from 'next-seo';
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { NextSeo } from "next-seo";
 
-import { Props as TagProps, Tag } from '@/components/pages/Tag';
-import { getArticle, getArticleFileNames } from '@/helpers/article';
+import { Props as TagProps, Tag } from "@/components/pages/Tag";
+import { getArticle, getArticleFileNames } from "@/helpers/article";
 
 const ArticlePage: NextPage<TagProps> = (props) => {
   return (
@@ -21,13 +21,13 @@ export const getStaticProps: GetStaticProps<TagProps, Params> = async ({
   params,
 }) => {
   if (!params) {
-    throw new TypeError('params must not be undefined');
+    throw new TypeError("params must not be undefined");
   }
 
   const fileNames = getArticleFileNames();
   const articles = fileNames.map(getArticle);
   const tagArticles = articles.filter((article) =>
-    article.tags.includes(params.id),
+    article.tags.includes(params.id)
   );
 
   return {
