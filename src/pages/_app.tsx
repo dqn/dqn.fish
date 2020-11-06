@@ -7,7 +7,6 @@ import * as React from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-import { name as title } from "@/../package.json";
 import { NavigationBar } from "@/components/templates/NavigationBar";
 import * as gtag from "@/helpers/gtag";
 
@@ -27,7 +26,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
         openGraph={{
           type: "website",
         }}
-        titleTemplate={`%s - ${title}`}
+        titleTemplate={`%s - dqn.fish`}
       />
 
       <NavigationBar />
