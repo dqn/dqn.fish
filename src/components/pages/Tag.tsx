@@ -12,10 +12,14 @@ export type Props = {
 export const Tag: React.FC<Props> = ({ tag, articles }) => {
   return (
     <div className="max-w-5xl px-3 lg:px-0 mx-auto">
-      <h2 className="text-xl font-bold mt-5">
-        <span className="border-b-2 border-theme-color">{tag}</span>
-      </h2>
-      <ArticleList articles={articles} />
+      <header>
+        <h2 className="text-xl font-bold mt-5">
+          <span className="border-b-2 border-theme-color">{tag}</span>
+        </h2>
+      </header>
+      <main>
+        <ArticleList articles={articles} />
+      </main>
     </div>
   );
 };

@@ -33,7 +33,7 @@ export const About: React.FC = () => {
 
   return (
     <>
-      <div className="relative w-full h-60vh">
+      <header className="relative w-full h-60vh">
         <div className="absolute w-full h-60vh">
           <SwimmingFish />
         </div>
@@ -45,20 +45,22 @@ export const About: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
-      <div className="max-w-3xl p-4 lg:px-0 mx-auto">
-        {infomations.map(({ title, items }, i) => (
-          <section className="mt-5 first:mt-0" key={i}>
-            <h3 className="text-xl font-bold">{title}</h3>
-            <ul className="list-disc pl-5">
-              {items.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
-          </section>
-        ))}
-      </div>
+      <main>
+        <article className="max-w-3xl p-4 lg:px-0 mx-auto">
+          {infomations.map(({ title, items }, i) => (
+            <section className="mt-5 first:mt-0" key={i}>
+              <h3 className="text-xl font-bold">{title}</h3>
+              <ul className="list-disc pl-5">
+                {items.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </article>
+      </main>
     </>
   );
 };

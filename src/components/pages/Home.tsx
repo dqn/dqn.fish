@@ -10,8 +10,8 @@ export type Props = {
 
 export const Home: React.FC<Props> = ({ articles }) => {
   return (
-    <div className="max-w-5xl px-3 lg:px-0 mx-auto">
+    <main className="max-w-5xl px-3 lg:px-0 mx-auto">
       <ArticleList articles={articles} />
-    </div>
+    </main>
   );
 };

@@ -6,7 +6,7 @@ import { About } from "@/components/pages/About";
 const AboutPage: NextPage = (props) => {
   return (
     <>
-      <NextSeo title="About" />
+      <NextSeo title="About" description="このブログの管理者について。" />
       <About {...props} />
     </>
   );

@@ -7,7 +7,10 @@ import { getArticle, getArticleFileNames } from "@/helpers/article";
 const ArticlePage: NextPage<TagProps> = (props) => {
   return (
     <>
-      <NextSeo title={props.tag} />
+      <NextSeo
+        title={props.tag}
+        description={`${props.tag} についての記事一覧。`}
+      />
       <Tag {...props} />
     </>
   );
