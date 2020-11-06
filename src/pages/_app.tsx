@@ -38,8 +38,8 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
         html {
           color: white;
           background-color: #21242d;
-          font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN',
-            'Hiragino Sans', Meiryo, sans-serif;
+          font-family: 'Source Sans Pro', Helvetica, Arial, 游ゴシック体,
+            YuGothic, メイリオ, Meiryo, sans-serif;
         }
       `}</style>
     </>
