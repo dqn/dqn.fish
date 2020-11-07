@@ -6,7 +6,7 @@ type Props = {
 
 export const EmailLink: React.FC<Props> = ({ email }) => {
   return (
-    <a href={`mailto:${email}`} className="underline">
+    <a href={`mailto:${email}`} className="hover:underline">
       {email}
     </a>
   );
