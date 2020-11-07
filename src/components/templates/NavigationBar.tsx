@@ -7,12 +7,12 @@ export const NavigationBar: React.FC = () => {
       <div className="text-xl font-bold flex items-center max-w-5xl mx-auto">
         <div>
           <Link href="/">
-            <a>dqn.fish</a>
+            <a className="hover:underline">dqn.fish</a>
           </Link>
         </div>
         <div className="text-right flex-grow">
           <Link href="/about">
-            <a>About</a>
+            <a className="hover:underline">About</a>
           </Link>
         </div>
       </div>

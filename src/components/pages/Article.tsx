@@ -15,7 +15,7 @@ export const Article: React.FC<Props> = ({ article }) => {
           <span className="text-xl lg:text-2xl font-bold">{article.title}</span>
         </h1>
         <div className="mt-2">
-          <time className="text-sm text-gray-600">
+          <time className="text-sm text-gray-500">
             {dayjs(article.published).format("YYYY/MM/DD")}
           </time>
         </div>

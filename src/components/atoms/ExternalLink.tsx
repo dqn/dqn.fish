@@ -10,7 +10,7 @@ export const ExternalLink: React.FC<Props> = ({ href, children }) => {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="underline"
+      className="hover:underline"
     >
       {children}
     </a>
