@@ -1,9 +1,6 @@
 ---
 title: Brainfuck にコンパイル可能な高水準言語を作った話
 published: 2020-11-03T12:33:32+0900
-tags:
-  - Brainfuck
-  - TypeScript
 ---
 
 少し前に Bigbrain という自作言語を作ったので紹介します。この言語は Brainfuck にコンパイルされます。ソースコードは GitHub で公開されています。
