@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && yarn build:rss",
+    "build": "next build && yarn build:rss && next export",
     "build:rss": "ts-node --dir ./scripts --transpile-only ./rss/index.ts",
     "start": "next start",
     "lint": "textlint articles/*"
