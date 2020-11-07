@@ -12,7 +12,10 @@ const linkRenderer = renderer.link.bind(renderer);
 
 renderer.link = (href, title, text) => {
   const html = linkRenderer(href, title, text);
-  return html.replace(/^<a /, '<a target="_blank" rel="noopener noreferrer" ');
+  return html.replace(
+    /^<a /,
+    '<a target="_blank" rel="noopener noreferrer" class="hover:underline"'
+  );
 };
 
 export type Article = {
