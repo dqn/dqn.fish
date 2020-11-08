@@ -7,7 +7,7 @@
 }
 
 .markdown {
-  @apply bg-white text-gray-900 leading-normal break-words;
+  @apply bg-white leading-normal break-words;
 }
 
 .markdown > * {
