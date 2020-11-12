@@ -1,6 +1,6 @@
 ---
 title: 役に立つかもしれない TypeScript の Extract の使い方
-published: 2020-11-23T22:26:46+0900
+published: 2020-11-12T22:26:46+0900
 ---
 
 TypeScript で、特定の型であることが明確なのに推論されないことがあります。
@@ -54,4 +54,4 @@ type TopFooValueType<A extends Foo[]> = A extends [infer F, ...infer _]
 type T = TopFooValueType<[{ value: 1 }, { value: 2 }]>; // 1
 ```
 
-あまり役に立つのか分からない小技の紹介でした（個人的にはよく使う）。
+あまり役に立つか分からない小技の紹介でした（個人的にはよく使う）。
