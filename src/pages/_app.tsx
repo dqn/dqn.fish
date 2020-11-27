@@ -25,6 +25,16 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
       <DefaultSeo
         openGraph={{
           type: "website",
+          title: "dqn.fish",
+          description: "気ままにやっていきます。",
+          images: [
+            {
+              url: "https://dqn.fish/avatar.png",
+            },
+          ],
+        }}
+        twitter={{
+          cardType: "summary",
         }}
         titleTemplate={`%s - dqn.fish`}
       />

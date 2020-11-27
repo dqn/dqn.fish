@@ -11,8 +11,7 @@ function generate() {
     feed_url: "https://dqn.fish/feed.xml",
     generator: "dqn.fish",
     language: "ja",
-    // TODO: add image URL
-    image_url: "https://dqn.fish/favicon.png",
+    image_url: "https://dqn.fish/avatar.png",
     copyright: "(C) dqn",
   });
 
@@ -24,8 +23,7 @@ function generate() {
       description: article.excerpt,
       author: "dqn",
       enclosure: {
-        // TODO: add enclosure
-        url: "https://dqn.fish/favicon.png",
+        url: "https://dqn.fish/avatar.png",
       },
     });
   });
