@@ -15,6 +15,7 @@ module.exports = {
                 "'self'",
                 "https://www.google-analytics.com",
                 "https://vitals.vercel-analytics.com",
+                "https://vitals.vercel-insights.com",
               ],
               scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
               scriptSrcElem: [
