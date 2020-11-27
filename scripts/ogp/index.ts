@@ -8,7 +8,7 @@ const fontSize = 36;
 async function generate() {
   const image = new Image();
   await new Promise((resolve, reject) => {
-    image.onload = resolve;
+    image.onload = resolve as () => void;
     image.onerror = (err) => reject(err);
     image.src = path.join(__dirname, "ogp.png");
   });

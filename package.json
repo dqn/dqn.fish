@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && yarn build:rss && build:ogp && next export",
+    "build": "next build && yarn build:rss && yarn build:ogp && next export",
     "build:rss": "ts-node --dir ./scripts --transpile-only ./rss/index.ts",
     "build:ogp": "mkdir -p ./public/ogp && ts-node --dir ./scripts --transpile-only ./ogp/index.ts",
     "start": "next start",
