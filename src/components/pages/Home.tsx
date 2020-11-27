@@ -10,7 +10,7 @@ export type Props = {
 
 export const Home: React.FC<Props> = ({ articles }) => {
   return (
-    <main className="max-w-5xl px-3 lg:px-0 mx-auto">
+    <main className="max-w-3xl px-3 lg:px-0 mx-auto">
       <ArticleList articles={articles} />
     </main>
   );

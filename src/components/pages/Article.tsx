@@ -13,7 +13,7 @@ export const Article: React.FC<Props> = ({ article }) => {
   const pageUrl = "https://dqn.fish/articles/" + article.id;
 
   return (
-    <div className="max-w-5xl mx-auto">
+    <div className="max-w-3xl mx-auto">
       <header className="w-full text-center px-3 py-12 lg:py-24">
         <h1 className="text-left inline-block">
           <span className="text-xl lg:text-2xl font-bold">{article.title}</span>

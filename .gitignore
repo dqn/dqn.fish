@@ -1,7 +1,7 @@
 .next/
 node_modules/
-.env
-.env.local
-
 out/
 public/feed.xml
+public/ogp/
+.env
+.env.local

@@ -7,11 +7,7 @@ import { getArticles } from "@/helpers/article";
 const HomePage: NextPage<HomeProps> = (props) => {
   return (
     <>
-      <NextSeo
-        title="dqn.fish"
-        titleTemplate="%s"
-        description="気ままにやっていきます。"
-      />
+      <NextSeo title="dqn.fish" titleTemplate="%s" />
       <Home {...props} />
     </>
   );

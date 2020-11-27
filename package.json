@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && yarn build:rss && next export",
+    "build": "next build && yarn build:rss && yarn build:ogp && next export",
     "build:rss": "ts-node --dir ./scripts --transpile-only ./rss/index.ts",
+    "build:ogp": "mkdir -p ./public/ogp && ts-node --dir ./scripts --transpile-only ./ogp/index.ts",
     "start": "next start",
     "lint": "textlint articles/*"
   },
@@ -28,6 +29,7 @@
     "@types/remove-markdown": "0.1.1",
     "@types/rss": "0.0.28",
     "autoprefixer": "10.0.3",
+    "canvas": "^2.6.1",
     "cssnano": "4.1.10",
     "husky": "4.3.0",
     "lint-staged": "10.5.2",
