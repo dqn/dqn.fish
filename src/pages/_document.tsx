@@ -27,7 +27,7 @@ class MyDocument extends Document {
             </>
           )}
 
-          <link rel="shortcut icon" href="/favicon.png" />
+          <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         </Head>
         <body>
           <Main />
