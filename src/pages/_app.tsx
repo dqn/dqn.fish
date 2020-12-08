@@ -10,8 +10,6 @@ import { useRouter } from "next/router";
 import { NavigationBar } from "@/components/templates/NavigationBar";
 import * as gtag from "@/helpers/gtag";
 
-const description = "気ままにやっていきます。";
-
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
 
@@ -26,11 +24,11 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
     <>
       <DefaultSeo
         titleTemplate={`%s - dqn.fish`}
-        description={description}
+        description={"個人の技術ブログです。"}
         openGraph={{
           type: "website",
           title: "dqn.fish",
-          description,
+          description: "気ままにやっています。",
           images: [
             {
               url: "https://dqn.fish/avatar.png",
