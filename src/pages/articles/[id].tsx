@@ -10,6 +10,11 @@ const ArticlePage: NextPage<ArticleProps> = (props) => {
       <NextSeo
         title={props.article.title}
         description={props.article.excerpt}
+        openGraph={{
+          type: "website",
+          title: props.article.title,
+          description: props.article.excerpt,
+        }}
       />
       <Article {...props} />
     </>
