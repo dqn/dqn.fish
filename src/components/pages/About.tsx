@@ -19,7 +19,7 @@ export const About: React.FC = () => {
     },
     {
       title: "Contact",
-      items: [<EmailLink email={"dqn443@gmail.com"} />],
+      items: [<EmailLink email={"dqn270@gmail.com"} />],
     },
     {
       title: "RSS",
