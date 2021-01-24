@@ -1,8 +1,4 @@
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
   purge: ["./src/**/*.html", "./src/**/*.tsx"],
   theme: {
     extend: {
@@ -13,9 +9,6 @@ module.exports = {
         "60vh": "60vh",
       },
     },
-  },
-  variants: {
-    margin: ["first"],
   },
   plugins: [],
 };
