@@ -24,7 +24,7 @@ module.exports = {
                 "'unsafe-inline'",
               ],
               styleSrc: ["'self'", "'unsafe-inline'"],
-              imgSrc: ["https://i.gyazo.com"],
+              imgSrc: ["'self'", "https://i.gyazo.com"],
             },
           },
           referrerPolicy: ["same-origin", "strict-origin-when-cross-origin"],
