@@ -4075,10 +4075,10 @@ needle@^2.2.1:
     iconv-lite "^0.4.4"
     sax "^1.2.4"
 
-next-secure-headers@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/next-secure-headers/-/next-secure-headers-2.1.0.tgz#fca2b83f9f30ccec17443f8ca0fab79433edec5f"
-  integrity sha512-52hskKwZ9s8K4ZGQglOdpSPtrVVRLKHGbxjQ2McnvJl0Iv7iQAFG9D42aWuRdueE0EEpdkuSNiQcJR0fIMSgTw==
+next-secure-headers@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/next-secure-headers/-/next-secure-headers-2.2.0.tgz#d4eb1b00a424f811c1455d1288990a4aad3026af"
+  integrity sha512-C7OfZ9JdSJyYMz2ZBMI/WwNbt0qNjlFWX9afUp8nEUzbz6ez3JbeopdyxSZJZJAzVLIAfyk6n73rFpd4e22jRg==
 
 next-seo@4.20.0:
   version "4.20.0"
