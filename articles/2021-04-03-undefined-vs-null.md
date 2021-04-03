@@ -212,11 +212,11 @@ function getAgeClass(age: number): AgeClass {
 例外がやりすぎだという場合には、「有効であるか」と「階級」を別で表現し、オブジェクトにして返します。
 
 ```ts
-type getAgeClassResult =
+type GetAgeClassResult =
   | { isValid: true; ageClass: AgeClass }
   | { isValid: false };
 
-function getAgeClass(age: number): getAgeClassResult {
+function getAgeClass(age: number): GetAgeClassResult {
   if (age >= 10 && age < 20) {
     return {
       isValid: true,
@@ -247,12 +247,12 @@ if (result.isValid) {
   result.ageClass; // AgeClass
 }
 
-result.ageClass; // Property 'ageClass' does not exist on type 'getAgeClassResult'.
+result.ageClass; // Property 'ageClass' does not exist on type 'GetAgeClassResult'.
 ```
 
 ## おわりに
 
-この記事では `undefined` と `null` の相違点や望ましい付き合い方について紹介しました。この記事で紹介したような設計は、バリデーションライブラリの [zod](https://github.com/colinhacks/zod) でも使われています。
+この記事では `undefined` と `null` の相違点や望ましい付き合い方について紹介しました。この記事で紹介したような設計は、バリデーションライブラリの [Zod](https://github.com/colinhacks/zod) でも使われています。
 
 ```ts
 const stringSchema = z.string();
