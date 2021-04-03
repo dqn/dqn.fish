@@ -11,7 +11,7 @@ JavaScript / TypeScript で nullish な値を表現する場合、`undefined` �
 
 ## undefined が発生するケース
 
-undefined が発生するケースの例をいくつか挙げてみます。
+`undefined` が発生するケースの例をいくつか挙げてみます。
 
 - 変数が初期化されていない場合
 
@@ -100,7 +100,7 @@ JSON.stringify([0, undefined, 2]); // "[0,null,2]"
 
 ## null が発生するケース
 
-null が発生するケースの例をいくつか挙げてみます。
+`null` が発生するケースの例をいくつか挙げてみます。
 
 - 標準組込みオブジェクトのメソッドの返り値
 
@@ -195,7 +195,7 @@ interface FunctionComponent<P = {}> {
 }
 ```
 
-では `undefined` より `null` を使うべきなのかといわれると、必ずしもそうではありません。JavaScript の仕様上 `undefined` が登場する機会の方が多いですし、`undefined` を撲滅することは不可能です。それに、`undefined` の方を好む人も多く存在するはずです。個人開発では `null` を貫くのもいいかもしれませんが、チーム開発や OSS として公開するとなると、望んでいないところで `null` を扱うことになってしまう人もでてくるかもしれません。
+では `undefined` より `null` を使うべきなのかといわれると、必ずしもそうではありません。JavaScript の仕様上 `undefined` が発生する機会の方が多いですし、`undefined` を撲滅することは不可能です。それに、`undefined` の方を好む人も多く存在するはずです。個人開発では `null` を貫くのもいいかもしれませんが、チーム開発や OSS として公開するとなると、望んでいないところで `null` を扱うことになってしまう人もでてくるかもしれません。
 
 最も良いのは、`undefined` **も** `null` **も返さなくていい設計**にすることです。
 
@@ -252,7 +252,7 @@ result.ageClass; // Property 'ageClass' does not exist on type 'GetAgeClassResul
 
 ## おわりに
 
-この記事では `undefined` と `null` の相違点や望ましい付き合い方について紹介しました。この記事で紹介したような設計は、バリデーションライブラリの [Zod](https://github.com/colinhacks/zod) でも使われています。
+この記事では `undefined` と `null` の相違点や望ましい付き合い方について紹介しました。今回紹介したような設計は、バリデーションライブラリの [Zod](https://github.com/colinhacks/zod) でも使われています。
 
 ```ts
 const stringSchema = z.string();
