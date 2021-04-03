@@ -3,11 +3,11 @@ title: undefined と null、どちらに寄せるべきか
 published: 2021-04-03T12:03:09+0900
 ---
 
-JavaScript / TypeScript で値が存在しないことを表現する場合、`undefined` または `null` を使うことになると思いますが、どちらに寄せるべきなのかを考えてみます。
+JavaScript / TypeScript で nullish な値を表現する場合、`undefined` または `null` を使うことになると思いますが、どちらに寄せるべきなのかを考えてみます。
 
 ## 結論
 
-`undefined` **も** `null` **も発生させない設計**にすることが最善です。
+可能な限り `undefined` **も** `null` **も発生させない設計**にし、どうしても nullish な値を扱いたい場合は `null` を使うのが最善だと思っています。
 
 ## undefined が発生するケース
 
@@ -29,7 +29,7 @@ declare const obj: { foo?: number };
 obj.foo; // number | undefined
 ```
 
-- nullish な値（`null` または `undefined`）に対して Optional chaining を使用した場合
+- nullish な値に対して Optional chaining を使用した場合
 
 ```ts
 declare const obj: null | { foo: number };
