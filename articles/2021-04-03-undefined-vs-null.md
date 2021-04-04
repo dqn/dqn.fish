@@ -126,6 +126,8 @@ const FileInput: React.VFC = () => {
 
 素で JavaScript / TypeScript を扱う場合、`null` が発生するケースは `undefined` と比べて多くありません。
 
+`undefined` の代わりに `null` を使うことのメリットとしては、`undefined` や `void 0` よりタイプ数が少ないことが挙げられます。また、`undefined` はグローバルオブジェクトのプロパティであるのに対して `null` はリテラルなので、上書きされるといった恐れがありません。
+
 ## どちらを使うべきか
 
 引数に年齢を取り、年齢に応じた階級を返す関数を考えてみます。
@@ -250,9 +252,11 @@ if (result.isValid) {
 result.ageClass; // Property 'ageClass' does not exist on type 'GetAgeClassResult'.
 ```
 
-## おわりに
+`undefined` も `null` も返さない設計にすることで、使う側は nullish な値の扱いに囚われずに済みます。
 
-この記事では `undefined` と `null` の相違点や望ましい付き合い方について紹介しました。今回紹介したような設計は、バリデーションライブラリの [Zod](https://github.com/colinhacks/zod) でも使われています。
+## あとがき
+
+今回紹介したような設計は、バリデーションライブラリの [Zod](https://github.com/colinhacks/zod) でも使われています。
 
 ```ts
 const stringSchema = z.string();
