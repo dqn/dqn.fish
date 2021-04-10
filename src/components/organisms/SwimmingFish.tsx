@@ -3,8 +3,6 @@ import * as React from "react";
 
 import tailwind from "@/../tailwind.config";
 
-const text = "🐟";
-
 const backgroundColor = tailwind.theme.extend.colors["theme-color"];
 const bubbleColor = "#ffffffa0";
 
@@ -29,6 +27,10 @@ function random(min: number, max: number): number {
 
 function randomBoolean(): boolean {
   return Math.random() > 0.5;
+}
+
+function booleanToNumber(bool: boolean): 1 | -1 {
+  return bool ? 1 : -1;
 }
 
 function useDisplayableSize(
@@ -93,10 +95,40 @@ export const SwimmingFish: React.FC = () => {
       return;
     }
 
-    const drawInReverse = (fn: () => void) => {
+    const states = {
+      hover: false,
+      mouse: {
+        x: 0,
+        y: 0,
+      },
+    };
+
+    canvasRef.current.addEventListener("mouseover", () => {
+      states.hover = true;
+    });
+
+    canvasRef.current.addEventListener("mouseout", () => {
+      states.hover = false;
+    });
+
+    canvasRef.current.addEventListener("mousemove", (event) => {
+      if (!canvasRef.current) {
+        return;
+      }
+
+      const rect = canvasRef.current.getBoundingClientRect();
+
+      states.mouse.x = event.clientX - rect.left;
+      states.mouse.y = event.clientY - rect.top;
+    });
+
+    const drawInReverse = (x: number, fn: () => void) => {
+      ctx.save();
+      ctx.translate(x, 0);
       ctx.scale(-1, 1);
+      ctx.translate(-x, 0);
       fn();
-      ctx.scale(-1, 1);
+      ctx.restore();
     };
 
     const drawBackground = () => {
@@ -143,16 +175,18 @@ export const SwimmingFish: React.FC = () => {
     };
 
     const createFlowingText = (base?: Partial<FlowingText>): FlowingText => {
+      const reverse = randomBoolean();
+
       return {
-        text,
-        x: width,
+        text: "🐟",
+        x: reverse ? 0 : width,
         y: random(0, height - maxFlowingTextSize),
         size: random(minFlowingTextSize, maxFlowingTextSize),
         verocity: random(minFlowingTextVerocity, maxFlowingTextVerocity),
         transparency: Math.floor(
           random(minFlowingTextTransparency, maxFlowingTextTransparency)
         ),
-        reverse: randomBoolean(),
+        reverse,
         ...base,
       };
     };
@@ -161,19 +195,56 @@ export const SwimmingFish: React.FC = () => {
 
     for (let i = 0; i < width / widthPerFlowingText; ++i) {
       const flowingText = createFlowingText({
-        text: text,
         x: random(0, width + maxFlowingTextSize),
       });
       flowingTexts.push(flowingText);
     }
 
     const updateFlowingText = (flowingText: FlowingText) => {
-      if (flowingText.x < -flowingText.size) {
+      if (
+        (!flowingText.reverse && flowingText.x < -flowingText.size) ||
+        (flowingText.reverse && flowingText.x > width + flowingText.size)
+      ) {
         Object.assign(flowingText, createFlowingText());
         return;
       }
 
-      flowingText.x += -flowingText.verocity;
+      if (states.hover) {
+        const rad = Math.atan(
+          (flowingText.y - states.mouse.y) / (flowingText.x - states.mouse.x)
+        );
+
+        const areaSize = 50;
+
+        if (Math.abs(flowingText.x - states.mouse.x) > areaSize) {
+          const reverse = flowingText.x < states.mouse.x;
+          const xSign = booleanToNumber(reverse);
+          const coefficient = Math.abs(Math.cos(rad));
+          flowingText.reverse = reverse;
+          flowingText.x += flowingText.verocity * coefficient * xSign;
+        }
+
+        if (Math.abs(flowingText.y - states.mouse.y) > areaSize) {
+          const ySign = booleanToNumber(flowingText.y < states.mouse.y);
+          const coefficient = Math.abs(Math.sin(rad));
+          flowingText.y += flowingText.verocity * coefficient * ySign;
+        }
+
+        if (
+          Math.abs(flowingText.x - states.mouse.x) < areaSize &&
+          Math.abs(flowingText.y - states.mouse.y) < areaSize
+        ) {
+          const sign = booleanToNumber(flowingText.reverse);
+          const rad = random(0, 360) * (Math.PI / 180);
+          const xCoefficient = Math.abs(Math.cos(rad));
+          const yCoefficient = Math.abs(Math.sin(rad));
+          flowingText.x += flowingText.verocity * xCoefficient * sign;
+          flowingText.y += flowingText.verocity * yCoefficient * sign;
+        }
+      } else {
+        const sign = booleanToNumber(flowingText.reverse);
+        flowingText.x += flowingText.verocity * sign;
+      }
     };
 
     const drawFlowingText = ({
@@ -190,12 +261,21 @@ export const SwimmingFish: React.FC = () => {
       ctx.textBaseline = "top";
 
       if (reverse) {
-        drawInReverse(() => {
-          ctx.fillText(text, x - width, y);
+        drawInReverse(x, () => {
+          ctx.fillText(text, x, y);
         });
       } else {
         ctx.fillText(text, x, y);
       }
+    };
+
+    const drawCursor = () => {
+      ctx.font = "32px serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillStyle = "#000000FF";
+
+      ctx.fillText("🦐", states.mouse.x, states.mouse.y);
     };
 
     const frame = (): number => {
@@ -205,6 +285,10 @@ export const SwimmingFish: React.FC = () => {
       drawBackground();
       flowingTexts.forEach(drawFlowingText);
       bubbles.forEach(drawBubble);
+
+      if (states.hover) {
+        drawCursor();
+      }
 
       return requestAnimationFrame(frame);
     };

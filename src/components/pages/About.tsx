@@ -34,17 +34,10 @@ export const About: React.FC = () => {
   return (
     <>
       <header className="relative w-full h-60vh">
-        <div className="absolute w-full h-60vh">
-          <SwimmingFish />
-        </div>
-
-        <div className="absolute w-full h-60vh">
-          <div className="h-full flex items-center">
-            <div className="text-center w-full">
-              <h1 className="font-bold text-3xl">dqn.fish</h1>
-            </div>
-          </div>
-        </div>
+        <SwimmingFish />
+        <h1 className="absolute font-bold text-3xl left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          dqn.fish
+        </h1>
       </header>
 
       <main>
