@@ -3,26 +3,32 @@ import * as React from "react";
 
 import tailwind from "@/../tailwind.config";
 
-const BACKGROUND_COLOR = tailwind.theme.extend.colors["theme-color"];
-const BUBBLE_COLOR = "#ffffffa0";
+const text = "🐟";
 
-const WIDTH_PER_BUBBLE = 100;
-const WIDTH_PER_FLOWING_TEXT = 200;
+const backgroundColor = tailwind.theme.extend.colors["theme-color"];
+const bubbleColor = "#ffffffa0";
 
-const MIN_BUBBLE_RADIUS = 6;
-const MAX_BUBBLE_RADIUS = 12;
-const MIN_BUBBLE_VELOCITY = 1;
-const MAX_BUBBLE_VELOCITY = 2.5;
+const widthPerBubble = 100;
+const widthPerFlowingText = 200;
 
-const MIN_FLOWING_TEXT_SIZE = 28;
-const MAX_FLOWING_TEXT_SIZE = 64;
-const MIN_FLOWING_TEXT_VEROCITY = 2;
-const MAX_FLOWING_TEXT_VEROCITY = 7;
-const MIN_FLOWING_TEXT_TRANSPARENCY = 64;
-const MAX_FLOWING_TEXT_TRANSPARENCY = 208;
+const minBubbleRadius = 6;
+const maxBubbleRadius = 12;
+const minBubbleVelocity = 1;
+const maxBubbleVelocity = 2.5;
+
+const minFlowingTextSize = 28;
+const maxFlowingTextSize = 64;
+const minFlowingTextVerocity = 2;
+const maxFlowingTextVerocity = 7;
+const minFlowingTextTransparency = 64;
+const maxFlowingTextTransparency = 208;
 
 function random(min: number, max: number): number {
   return Math.random() * (max - min) + min;
+}
+
+function randomBoolean(): boolean {
+  return Math.random() > 0.5;
 }
 
 function useDisplayableSize(
@@ -82,25 +88,38 @@ export const SwimmingFish: React.FC = () => {
     canvasRef.current.height = height;
 
     const ctx = canvasRef.current?.getContext("2d");
+
     if (!ctx) {
       return;
     }
 
+    const drawInReverse = (fn: () => void) => {
+      ctx.scale(-1, 1);
+      fn();
+      ctx.scale(-1, 1);
+    };
+
+    const drawBackground = () => {
+      ctx.fillStyle = backgroundColor;
+      ctx.fillRect(0, 0, width, height);
+    };
+
     const createBubble = (base?: Partial<Bubble>): Bubble => {
       return {
         x: random(0, width),
-        y: height + MAX_BUBBLE_RADIUS,
-        radius: random(MIN_BUBBLE_RADIUS, MAX_BUBBLE_RADIUS),
-        verocity: random(MIN_BUBBLE_VELOCITY, MAX_BUBBLE_VELOCITY),
+        y: height + maxBubbleRadius,
+        radius: random(minBubbleRadius, maxBubbleRadius),
+        verocity: random(minBubbleVelocity, maxBubbleVelocity),
         count: random(0, 100),
         ...base,
       };
     };
 
     const bubbles: Bubble[] = [];
-    for (let i = 0; i < width / WIDTH_PER_BUBBLE; ++i) {
+
+    for (let i = 0; i < width / widthPerBubble; ++i) {
       const bubble = createBubble({
-        y: random(0, height + MAX_BUBBLE_RADIUS),
+        y: random(0, height + maxBubbleRadius),
       });
       bubbles.push(bubble);
     }
@@ -116,51 +135,44 @@ export const SwimmingFish: React.FC = () => {
       bubble.count += 1;
     };
 
-    const drawBackground = () => {
-      ctx.fillStyle = BACKGROUND_COLOR;
-      ctx.fillRect(0, 0, width, height);
-    };
-
     const drawBubble = ({ x, y, radius }: Bubble) => {
-      ctx.fillStyle = BUBBLE_COLOR;
+      ctx.fillStyle = bubbleColor;
       ctx.beginPath();
       ctx.ellipse(x, y, radius, radius, 0, 0, Math.PI * 2);
       ctx.fill();
     };
 
-    const createFlowingText = (
-      base: Partial<Omit<FlowingText, "text">> & Pick<FlowingText, "text">
-    ): FlowingText => {
+    const createFlowingText = (base?: Partial<FlowingText>): FlowingText => {
       return {
+        text,
         x: width,
-        y: random(0, height - MAX_FLOWING_TEXT_SIZE),
-        size: random(MIN_FLOWING_TEXT_SIZE, MAX_FLOWING_TEXT_SIZE),
-        verocity: random(MIN_FLOWING_TEXT_VEROCITY, MAX_FLOWING_TEXT_VEROCITY),
+        y: random(0, height - maxFlowingTextSize),
+        size: random(minFlowingTextSize, maxFlowingTextSize),
+        verocity: random(minFlowingTextVerocity, maxFlowingTextVerocity),
         transparency: Math.floor(
-          random(MIN_FLOWING_TEXT_TRANSPARENCY, MAX_FLOWING_TEXT_TRANSPARENCY)
+          random(minFlowingTextTransparency, maxFlowingTextTransparency)
         ),
-        reverse: Math.random() > 0.5,
+        reverse: randomBoolean(),
         ...base,
       };
     };
 
     const flowingTexts: FlowingText[] = [];
-    for (let i = 0; i < width / WIDTH_PER_FLOWING_TEXT; ++i) {
+
+    for (let i = 0; i < width / widthPerFlowingText; ++i) {
       const flowingText = createFlowingText({
-        text: "🐟",
-        x: random(0, width + MAX_FLOWING_TEXT_SIZE),
+        text: text,
+        x: random(0, width + maxFlowingTextSize),
       });
       flowingTexts.push(flowingText);
     }
 
     const updateFlowingText = (flowingText: FlowingText) => {
       if (flowingText.x < -flowingText.size) {
-        Object.assign(
-          flowingText,
-          createFlowingText({ text: flowingText.text })
-        );
+        Object.assign(flowingText, createFlowingText());
         return;
       }
+
       flowingText.x += -flowingText.verocity;
     };
 
@@ -178,16 +190,15 @@ export const SwimmingFish: React.FC = () => {
       ctx.textBaseline = "top";
 
       if (reverse) {
-        ctx.scale(-1, 1);
-        ctx.fillText(text, x - width, y);
-        ctx.scale(-1, 1);
+        drawInReverse(() => {
+          ctx.fillText(text, x - width, y);
+        });
       } else {
         ctx.fillText(text, x, y);
       }
     };
 
-    let handle: number;
-    const frame = () => {
+    const frame = (): number => {
       flowingTexts.forEach(updateFlowingText);
       bubbles.forEach(updateBubble);
 
@@ -195,11 +206,14 @@ export const SwimmingFish: React.FC = () => {
       flowingTexts.forEach(drawFlowingText);
       bubbles.forEach(drawBubble);
 
-      handle = requestAnimationFrame(frame);
+      return requestAnimationFrame(frame);
     };
-    handle = requestAnimationFrame(frame);
 
-    return () => cancelAnimationFrame(handle);
+    const handle = frame();
+
+    return () => {
+      cancelAnimationFrame(handle);
+    };
   }, [width, height]);
 
   return <canvas ref={canvasRef} />;
