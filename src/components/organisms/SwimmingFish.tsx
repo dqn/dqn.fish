@@ -7,19 +7,19 @@ const backgroundColor = tailwind.theme.extend.colors["theme-color"];
 const bubbleColor = "#ffffffa0";
 
 const widthPerBubble = 100;
-const widthPerFlowingText = 200;
+const widthPerFish = 100;
 
 const minBubbleRadius = 6;
 const maxBubbleRadius = 12;
 const minBubbleVelocity = 1;
 const maxBubbleVelocity = 2.5;
 
-const minFlowingTextSize = 28;
-const maxFlowingTextSize = 64;
-const minFlowingTextVerocity = 2;
-const maxFlowingTextVerocity = 7;
-const minFlowingTextTransparency = 64;
-const maxFlowingTextTransparency = 208;
+const minFishSize = 28;
+const maxFishSize = 64;
+const minFishVerocity = 2;
+const maxFishVerocity = 7;
+const minFishTransparency = 64;
+const maxFishTransparency = 208;
 
 function random(min: number, max: number): number {
   return Math.random() * (max - min) + min;
@@ -63,7 +63,7 @@ type Bubble = {
   count: number; // random seed
 };
 
-type FlowingText = {
+type Fish = {
   text: string;
   x: number;
   y: number;
@@ -128,6 +128,20 @@ export const SwimmingFish: React.FC = () => {
       ctx.restore();
     };
 
+    const drawWithRotate = (
+      x: number,
+      y: number,
+      rad: number,
+      fn: () => void,
+    ) => {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(Math.cos(rad) > 0 ? -rad : rad - Math.PI);
+      ctx.translate(-x, -y);
+      fn();
+      ctx.restore();
+    };
+
     const drawBackground = () => {
       ctx.fillStyle = backgroundColor;
       ctx.fillRect(0, 0, width, height);
@@ -171,77 +185,67 @@ export const SwimmingFish: React.FC = () => {
       ctx.fill();
     };
 
-    const createFlowingText = (base?: Partial<FlowingText>): FlowingText => {
+    const createFish = (base?: Partial<Fish>): Fish => {
       const reverse = randomBoolean();
 
       return {
         text: "🐟",
         x: reverse ? 0 : width,
-        y: random(0, height - maxFlowingTextSize),
+        y: random(0, height - maxFishSize),
         rad: reverse ? 0 : Math.PI,
-        size: random(minFlowingTextSize, maxFlowingTextSize),
-        verocity: random(minFlowingTextVerocity, maxFlowingTextVerocity),
+        size: random(minFishSize, maxFishSize),
+        verocity: random(minFishVerocity, maxFishVerocity),
         transparency: Math.floor(
-          random(minFlowingTextTransparency, maxFlowingTextTransparency),
+          random(minFishTransparency, maxFishTransparency),
         ),
         eating: false,
         ...base,
       };
     };
 
-    const flowingTexts: FlowingText[] = [];
+    const fishList: Fish[] = [];
 
-    for (let i = 0; i < width / widthPerFlowingText; ++i) {
-      const flowingText = createFlowingText({
-        x: random(0, width + maxFlowingTextSize),
+    for (let i = 0; i < width / widthPerFish; ++i) {
+      const fish = createFish({
+        x: random(0, width + maxFishSize),
       });
-      flowingTexts.push(flowingText);
+      fishList.push(fish);
     }
 
-    const updateFlowingText = (flowingText: FlowingText) => {
-      if (
-        flowingText.x < -flowingText.size ||
-        flowingText.x > width + flowingText.size
-      ) {
-        Object.assign(flowingText, createFlowingText());
+    const updateFish = (fish: Fish) => {
+      if (fish.x < -fish.size || fish.x > width + fish.size) {
+        Object.assign(fish, createFish());
         return;
       }
 
       if (states.mouse.isHovering) {
         const areaSize = 40;
 
-        const xDist = Math.abs(states.mouse.x - flowingText.x);
-        const yDist = Math.abs(states.mouse.y - flowingText.y);
+        const xDist = Math.abs(states.mouse.x - fish.x);
+        const yDist = Math.abs(states.mouse.y - fish.y);
 
         if (xDist > areaSize || yDist > areaSize) {
-          flowingText.rad = Math.atan2(
-            states.mouse.y - flowingText.y,
-            states.mouse.x - flowingText.x,
+          fish.rad = Math.atan2(
+            states.mouse.y - fish.y,
+            states.mouse.x - fish.x,
           );
 
-          flowingText.eating = false;
+          fish.eating = false;
         } else {
-          if (!flowingText.eating) {
-            flowingText.rad = random(0, 2 * Math.PI);
-            flowingText.eating = true;
+          if (!fish.eating) {
+            fish.rad = random(0, 2 * Math.PI);
+            fish.eating = true;
           }
         }
       } else {
-        flowingText.rad = Math.cos(flowingText.rad) > 0 ? 0 : Math.PI;
+        fish.rad = Math.cos(fish.rad) > 0 ? 0 : Math.PI;
       }
 
-      flowingText.x += flowingText.verocity * Math.cos(flowingText.rad);
-      flowingText.y += flowingText.verocity * Math.sin(flowingText.rad);
+      fish.x += fish.verocity * Math.cos(fish.rad);
+      fish.y += fish.verocity * Math.sin(fish.rad);
     };
 
-    const drawFlowingText = ({
-      text,
-      x,
-      y,
-      rad,
-      size,
-      transparency,
-    }: FlowingText) => {
+    const drawFish = ({ text, x, y, rad, size, transparency }: Fish) => {
       ctx.fillStyle = `#000000${transparency.toString(16)}`;
       ctx.font = `${size}px serif`;
       ctx.textAlign = "left";
@@ -249,10 +253,14 @@ export const SwimmingFish: React.FC = () => {
 
       if (Math.cos(rad) > 0) {
         drawInReverse(x, () => {
-          ctx.fillText(text, x, y);
+          drawWithRotate(x, y, rad, () => {
+            ctx.fillText(text, x, y);
+          });
         });
       } else {
-        ctx.fillText(text, x, y);
+        drawWithRotate(x, y, rad, () => {
+          ctx.fillText(text, x, y);
+        });
       }
     };
 
@@ -266,11 +274,11 @@ export const SwimmingFish: React.FC = () => {
     };
 
     const frame = (): number => {
-      flowingTexts.forEach(updateFlowingText);
+      fishList.forEach(updateFish);
       bubbles.forEach(updateBubble);
 
       drawBackground();
-      flowingTexts.forEach(drawFlowingText);
+      fishList.forEach(drawFish);
       bubbles.forEach(drawBubble);
 
       if (states.mouse.isHovering) {
