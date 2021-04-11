@@ -29,12 +29,8 @@ function randomBoolean(): boolean {
   return Math.random() > 0.5;
 }
 
-function booleanToNumber(bool: boolean): 1 | -1 {
-  return bool ? 1 : -1;
-}
-
 function useDisplayableSize(
-  ref: React.RefObject<HTMLCanvasElement>
+  ref: React.RefObject<HTMLCanvasElement>,
 ): [number, number] {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
@@ -71,10 +67,11 @@ type FlowingText = {
   text: string;
   x: number;
   y: number;
+  rad: number;
   size: number;
   verocity: number;
   transparency: number;
-  reverse: boolean;
+  eating: boolean;
 };
 
 export const SwimmingFish: React.FC = () => {
@@ -96,19 +93,19 @@ export const SwimmingFish: React.FC = () => {
     }
 
     const states = {
-      hover: false,
       mouse: {
+        isHovering: false,
         x: 0,
         y: 0,
       },
     };
 
     canvasRef.current.addEventListener("mouseover", () => {
-      states.hover = true;
+      states.mouse.isHovering = true;
     });
 
     canvasRef.current.addEventListener("mouseout", () => {
-      states.hover = false;
+      states.mouse.isHovering = false;
     });
 
     canvasRef.current.addEventListener("mousemove", (event) => {
@@ -181,12 +178,13 @@ export const SwimmingFish: React.FC = () => {
         text: "🐟",
         x: reverse ? 0 : width,
         y: random(0, height - maxFlowingTextSize),
+        rad: reverse ? 0 : Math.PI,
         size: random(minFlowingTextSize, maxFlowingTextSize),
         verocity: random(minFlowingTextVerocity, maxFlowingTextVerocity),
         transparency: Math.floor(
-          random(minFlowingTextTransparency, maxFlowingTextTransparency)
+          random(minFlowingTextTransparency, maxFlowingTextTransparency),
         ),
-        reverse,
+        eating: false,
         ...base,
       };
     };
@@ -202,65 +200,54 @@ export const SwimmingFish: React.FC = () => {
 
     const updateFlowingText = (flowingText: FlowingText) => {
       if (
-        (!flowingText.reverse && flowingText.x < -flowingText.size) ||
-        (flowingText.reverse && flowingText.x > width + flowingText.size)
+        flowingText.x < -flowingText.size ||
+        flowingText.x > width + flowingText.size
       ) {
         Object.assign(flowingText, createFlowingText());
         return;
       }
 
-      if (states.hover) {
-        const rad = Math.atan(
-          (flowingText.y - states.mouse.y) / (flowingText.x - states.mouse.x)
-        );
+      if (states.mouse.isHovering) {
+        const areaSize = 40;
 
-        const areaSize = 50;
+        const xDist = Math.abs(states.mouse.x - flowingText.x);
+        const yDist = Math.abs(states.mouse.y - flowingText.y);
 
-        if (Math.abs(flowingText.x - states.mouse.x) > areaSize) {
-          const reverse = flowingText.x < states.mouse.x;
-          const xSign = booleanToNumber(reverse);
-          const coefficient = Math.abs(Math.cos(rad));
-          flowingText.reverse = reverse;
-          flowingText.x += flowingText.verocity * coefficient * xSign;
-        }
+        if (xDist > areaSize || yDist > areaSize) {
+          flowingText.rad = Math.atan2(
+            states.mouse.y - flowingText.y,
+            states.mouse.x - flowingText.x,
+          );
 
-        if (Math.abs(flowingText.y - states.mouse.y) > areaSize) {
-          const ySign = booleanToNumber(flowingText.y < states.mouse.y);
-          const coefficient = Math.abs(Math.sin(rad));
-          flowingText.y += flowingText.verocity * coefficient * ySign;
-        }
-
-        if (
-          Math.abs(flowingText.x - states.mouse.x) < areaSize &&
-          Math.abs(flowingText.y - states.mouse.y) < areaSize
-        ) {
-          const sign = booleanToNumber(flowingText.reverse);
-          const rad = random(0, 360) * (Math.PI / 180);
-          const xCoefficient = Math.abs(Math.cos(rad));
-          const yCoefficient = Math.abs(Math.sin(rad));
-          flowingText.x += flowingText.verocity * xCoefficient * sign;
-          flowingText.y += flowingText.verocity * yCoefficient * sign;
+          flowingText.eating = false;
+        } else {
+          if (!flowingText.eating) {
+            flowingText.rad = random(0, 2 * Math.PI);
+            flowingText.eating = true;
+          }
         }
       } else {
-        const sign = booleanToNumber(flowingText.reverse);
-        flowingText.x += flowingText.verocity * sign;
+        flowingText.rad = Math.cos(flowingText.rad) > 0 ? 0 : Math.PI;
       }
+
+      flowingText.x += flowingText.verocity * Math.cos(flowingText.rad);
+      flowingText.y += flowingText.verocity * Math.sin(flowingText.rad);
     };
 
     const drawFlowingText = ({
       text,
       x,
       y,
+      rad,
       size,
       transparency,
-      reverse,
     }: FlowingText) => {
       ctx.fillStyle = `#000000${transparency.toString(16)}`;
       ctx.font = `${size}px serif`;
       ctx.textAlign = "left";
       ctx.textBaseline = "top";
 
-      if (reverse) {
+      if (Math.cos(rad) > 0) {
         drawInReverse(x, () => {
           ctx.fillText(text, x, y);
         });
@@ -286,7 +273,7 @@ export const SwimmingFish: React.FC = () => {
       flowingTexts.forEach(drawFlowingText);
       bubbles.forEach(drawBubble);
 
-      if (states.hover) {
+      if (states.mouse.isHovering) {
         drawCursor();
       }
 
