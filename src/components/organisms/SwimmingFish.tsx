@@ -119,12 +119,6 @@ export const SwimmingFish: React.FC = () => {
       states.mouse.y = event.clientY - rect.top;
     });
 
-    let clickCount = 0;
-
-    canvasRef.current.addEventListener("mousedown", () => {
-      ++clickCount;
-    });
-
     const drawInReverse = (x: number, fn: () => void) => {
       ctx.save();
       ctx.translate(x, 0);
@@ -251,8 +245,6 @@ export const SwimmingFish: React.FC = () => {
       fish.y += fish.verocity * Math.sin(fish.rad);
     };
 
-    const canvas = getCanvas();
-
     const drawFish = ({ text, x, y, rad, size, transparency }: Fish) => {
       ctx.fillStyle = `#000000${transparency.toString(16)}`;
       ctx.font = `${size}px serif`;
@@ -260,26 +252,14 @@ export const SwimmingFish: React.FC = () => {
       ctx.textBaseline = "top";
 
       if (Math.cos(rad) > 0) {
-        ctx.globalAlpha = 1;
-
         drawInReverse(x, () => {
           drawWithRotate(x, y, rad, () => {
-            if (clickCount >= 10) {
-              ctx.globalAlpha = transparency / 255;
-              ctx.drawImage(canvas, x, y, size, size);
-            } else {
-              ctx.fillText(text, x, y);
-            }
+            ctx.fillText(text, x, y);
           });
         });
       } else {
         drawWithRotate(x, y, rad, () => {
-          if (clickCount >= 10) {
-            ctx.globalAlpha = transparency / 255;
-            ctx.drawImage(canvas, x, y, size, size);
-          } else {
-            ctx.fillText(text, x, y);
-          }
+          ctx.fillText(text, x, y);
         });
       }
     };
@@ -317,23 +297,3 @@ export const SwimmingFish: React.FC = () => {
 
   return <canvas ref={canvasRef} />;
 };
-
-function getCanvas() {
-  const canvas = document.createElement("canvas");
-  canvas.width = maxFishSize;
-  canvas.height = maxFishSize;
-
-  const ctx2 = canvas.getContext("2d");
-
-  if (!ctx2) {
-    throw new TypeError("context should not be null");
-  }
-
-  const image = new Image();
-  image.addEventListener("load", () => {
-    ctx2.drawImage(image, 0, 8, 38, 48);
-  });
-  image.src = "/saito.png";
-
-  return canvas;
-}
