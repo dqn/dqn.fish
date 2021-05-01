@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import { NavigationBar } from "@/components/templates/NavigationBar";
 import * as gtag from "@/helpers/gtag";
 
-const App: React.FC<AppProps> = ({ Component, pageProps }) => {
+const App: React.VFC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
 
   useEffect(() => {

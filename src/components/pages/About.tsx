@@ -5,7 +5,7 @@ import { SwimmingFish } from "@/components/organisms/SwimmingFish";
 import { EmailLink } from "../atoms/EmailLink";
 import { ExternalLink } from "../atoms/ExternalLink";
 
-export const About: React.FC = () => {
+export const About: React.VFC = () => {
   const infomations = [
     {
       title: "Author",

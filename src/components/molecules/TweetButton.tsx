@@ -7,7 +7,7 @@ type Props = {
   url: string;
 };
 
-export const TweetButton: React.FC<Props> = ({ text, url }) => {
+export const TweetButton: React.VFC<Props> = ({ text, url }) => {
   const intentUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
 
   return (

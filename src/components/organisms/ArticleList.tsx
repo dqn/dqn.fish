@@ -8,7 +8,7 @@ type Props = {
   articles: Article[];
 };
 
-export const ArticleList: React.FC<Props> = ({ articles }) => {
+export const ArticleList: React.VFC<Props> = ({ articles }) => {
   return (
     <div className="flex flex-wrap divide-y divide-gray-600">
       {articles.map(({ id, title, published, excerpt }, i) => (

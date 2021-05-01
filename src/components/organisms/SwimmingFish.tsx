@@ -74,7 +74,7 @@ type Fish = {
   eating: boolean;
 };
 
-export const SwimmingFish: React.FC = () => {
+export const SwimmingFish: React.VFC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [width, height] = useDisplayableSize(canvasRef);
 

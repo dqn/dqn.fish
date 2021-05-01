@@ -9,7 +9,7 @@ export type Props = {
   article: ArticleType;
 };
 
-export const Article: React.FC<Props> = ({ article }) => {
+export const Article: React.VFC<Props> = ({ article }) => {
   const pageUrl = "https://dqn.fish/articles/" + article.id;
 
   return (

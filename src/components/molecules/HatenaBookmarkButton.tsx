@@ -6,7 +6,7 @@ type Props = {
   url: string;
 };
 
-export const HatenaBookmarkButton: React.FC<Props> = ({ url }) => {
+export const HatenaBookmarkButton: React.VFC<Props> = ({ url }) => {
   const intentUrl = `https://b.hatena.ne.jp/entry/panel/?mode=confirm&url=${url}`;
 
   return (

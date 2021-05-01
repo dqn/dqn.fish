@@ -1,7 +1,7 @@
 import Link from "next/link";
 import * as React from "react";
 
-export const NavigationBar: React.FC = () => {
+export const NavigationBar: React.VFC = () => {
   return (
     <header className="text-white bg-theme-color px-3 py-2">
       <div className="text-xl font-bold flex items-center max-w-3xl mx-auto">

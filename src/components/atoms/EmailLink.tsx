@@ -4,7 +4,7 @@ type Props = {
   email: string;
 };
 
-export const EmailLink: React.FC<Props> = ({ email }) => {
+export const EmailLink: React.VFC<Props> = ({ email }) => {
   return (
     <a href={`mailto:${email}`} className="hover:underline">
       {email}
