@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "clsx": "1.1.1",
-    "dayjs": "1.10.5",
+    "dayjs": "1.10.6",
     "gray-matter": "4.0.3",
     "highlight.js": "11.0.1",
     "marked": "2.1.3",
