@@ -28,7 +28,7 @@
     "@types/react": "17.0.14",
     "@types/remove-markdown": "0.3.1",
     "@types/rss": "0.0.29",
-    "autoprefixer": "10.2.6",
+    "autoprefixer": "10.3.0",
     "canvas": "2.7.0",
     "cssnano": "5.0.6",
     "next-secure-headers": "2.2.0",
