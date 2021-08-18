@@ -30,7 +30,7 @@
     "@types/rss": "0.0.29",
     "autoprefixer": "10.3.1",
     "canvas": "2.7.0",
-    "cssnano": "5.0.7",
+    "cssnano": "5.0.8",
     "next-secure-headers": "2.2.0",
     "postcss": "8.3.6",
     "postcss-flexbugs-fixes": "5.0.2",
